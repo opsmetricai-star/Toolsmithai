@@ -1,6 +1,6 @@
 import "server-only";
 
-const MODELS = () => [process.env.GEMINI_MODEL || "gemini-3.8-flash", "gemini-3.8-flash", "gemini-flash-latest"];
+const MODELS = () => [process.env.GEMINI_MODEL || "gemini-3.8-flash", "gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-flash-latest"];
 
 export type GenResult = { summary: string; html: string; model: string };
 
@@ -65,8 +65,10 @@ export async function generateProject(args: {
   ];
 
   let lastErr = "Generation failed";
+  const deadline = Date.now() + 270_000; // stay inside the route's 300s limit
   for (const model of [...new Set(MODELS())]) {
-    for (let attempt = 0; attempt < 2; attempt++) {
+    for (let attempt = 0; attempt < 1; attempt++) {
+      if (Date.now() > deadline - 20_000) throw new Error("Generation timed out. Please try again.");
       const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-goog-api-key": key },
@@ -84,7 +86,7 @@ export async function generateProject(args: {
             maxOutputTokens: 60000,
           },
         }),
-        signal: AbortSignal.timeout(110_000),
+        signal: AbortSignal.timeout(Math.max(10_000, Math.min(150_000, deadline - Date.now()))),
       }).catch((e) => ({ ok: false, status: 0, json: async () => ({ error: { message: String(e) } }) }) as Response);
 
       const data = await res.json().catch(() => ({}));
@@ -99,9 +101,9 @@ export async function generateProject(args: {
         continue;
       }
       lastErr = data?.error?.message ?? `Gemini error ${res.status}`;
-      if (res.status === 404) break; // try next model
-      if (res.status === 503 || res.status === 429 || res.status === 0) await new Promise((r) => setTimeout(r, 1500));
-      else throw new Error(lastErr);
+      // unavailable, overloaded or rate-limited: move on to the next model
+      if ([404, 429, 500, 503, 0].includes(res.status)) break;
+      throw new Error(lastErr);
     }
   }
   throw new Error(lastErr);

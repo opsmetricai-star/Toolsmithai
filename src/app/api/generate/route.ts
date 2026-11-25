@@ -3,7 +3,7 @@ import { z } from "zod";
 import { supabaseAdmin, supabaseServer, getUser } from "@/lib/supabase/server";
 import { generateProject } from "@/lib/gemini";
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 const Body = z.object({
   projectId: z.string().uuid().optional(),
