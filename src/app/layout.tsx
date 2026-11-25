@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
-  title: { default: "ToolSmithAi — AI App and Website Builder", template: "%s | ToolSmithAi" },
-  description: "Describe what you want and ToolSmithAi builds it: apps, websites, slides, animations and more, in minutes.",
+  title: { default: "ToolSmithAi: the AI engine for business software", template: "%s | ToolSmithAi" },
+  description: "ToolSmithAi analyzes business requirements and generates, validates and revises production-ready software in minutes.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

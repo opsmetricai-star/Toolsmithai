@@ -24,7 +24,7 @@ export default async function Billing({ searchParams }: { searchParams: Promise<
             <p className="text-[13px] text-muted">${p.price} / month · {p.credits} credits</p>
             <ul className="mt-4 space-y-1.5 text-[13px] text-ink2">{p.features.map((f) => <li key={f}>• {f}</li>)}</ul>
             {profile.plan === p.id ? <p className="mt-5 text-[13px] text-muted">Your current plan</p> : (
-              <a href={p.link!} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-5 w-full py-2.5">Pay for {p.name}</a>
+              <a href={p.link!} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-5 w-full py-2.5">Upgrade to {p.name}</a>
             )}
           </div>
         ))}
@@ -43,7 +43,7 @@ export default async function Billing({ searchParams }: { searchParams: Promise<
       </ul>
       <h2 className="mt-10 text-[17px] font-medium">Subscription history</h2>
       <ul className="mt-3 max-w-xl space-y-2 text-[13px]">
-        {(subs ?? []).map((s) => <li key={s.id} className="flex justify-between rounded-lg border border-line bg-white p-3"><span className="capitalize">{s.plan} · {s.status}</span><span className="text-muted">renews {s.current_period_end ? new Date(s.current_period_end).toLocaleDateString() : "—"}</span></li>)}
+        {(subs ?? []).map((s) => <li key={s.id} className="flex justify-between rounded-lg border border-line bg-white p-3"><span className="capitalize">{s.plan} · {s.status}</span><span className="text-muted">renews {s.current_period_end ? new Date(s.current_period_end).toLocaleDateString() : "Not set"}</span></li>)}
         {!subs?.length && <li className="text-muted">No paid subscriptions.</li>}
       </ul>
     </AppShell>

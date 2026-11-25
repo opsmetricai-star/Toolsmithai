@@ -32,7 +32,7 @@ export function PromptBox({ signedIn, compact = false }: { signedIn: boolean; co
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); go(); } }}
           rows={compact ? 2 : 2}
-          placeholder={`Describe your idea, ToolSmithAi will bring it to life…`}
+          placeholder={`Describe the business outcome you need. The AI will build it…`}
           aria-label="Describe what you want to build"
           className="w-full resize-none bg-transparent text-[15px] text-ink placeholder:text-muted/80 focus:outline-none"
         />

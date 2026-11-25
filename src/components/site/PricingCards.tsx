@@ -18,7 +18,7 @@ export function PricingCards({ signedIn, current }: { signedIn: boolean; current
           <p className="mt-2 text-[13px] text-muted"><span className="text-[22px] font-medium text-ink">${p.price}</span> / month</p>
           <p className="mt-4 text-[14px] text-ink2">{p.blurb}</p>
           <ul className="mt-6 flex-1 space-y-3">
-            {p.features.map((f, i) => (
+            {p.features.map((f) => (
               <li key={f} className="flex items-start gap-3 text-[13.5px] text-ink2">
                 {f.startsWith("Everything") ? <Plus size={15} className="mt-0.5 shrink-0" /> : <Check size={15} className="mt-0.5 shrink-0 text-ink" />}
                 <span>{f}</span>
@@ -28,9 +28,11 @@ export function PricingCards({ signedIn, current }: { signedIn: boolean; current
           {current === p.id ? (
             <span className="btn btn-ghost mt-8 py-3">Current plan</span>
           ) : p.id === "free" ? (
-            <Link href={signedIn ? "/dashboard" : "/signup"} className="btn btn-ghost mt-8 py-3">Start free</Link>
+            <Link href={signedIn ? "/dashboard" : "/signup"} className="btn btn-ghost mt-8 py-3">{signedIn ? "Dashboard" : "Sign up"}</Link>
+          ) : signedIn ? (
+            <Link href={`/billing?plan=${p.id}`} className="btn btn-primary mt-8 py-3">Upgrade</Link>
           ) : (
-            <Link href={signedIn ? `/billing?plan=${p.id}` : `/signup?plan=${p.id}`} className="btn btn-primary mt-8 py-3">Join ToolSmith {p.name}</Link>
+            <Link href={`/signup?plan=${p.id}`} className="btn btn-primary mt-8 py-3">Sign up</Link>
           )}
         </div>
       ))}

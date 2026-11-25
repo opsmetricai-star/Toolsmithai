@@ -31,10 +31,10 @@ export function Header({ signedIn = false }: { signedIn?: boolean }) {
             </div>
           ))}
           <Link href="/pricing" className="rounded-md px-3 py-2 text-[14px] text-ink2 hover:text-ink">Pricing</Link>
-          <Link href="/enterprise" className="rounded-md px-3 py-2 text-[14px] text-ink2 hover:text-ink">Enterprise</Link>
+          
         </nav>
         <div className="ml-auto hidden items-center gap-3 lg:flex">
-          <Link href="/enterprise" className="whitespace-nowrap px-3 text-[14px] text-ink2 hover:text-ink">Contact sales</Link>
+          
           {signedIn ? (
             <Link href="/dashboard" className="btn btn-primary">Dashboard</Link>
           ) : (
@@ -84,7 +84,7 @@ export function Header({ signedIn = false }: { signedIn?: boolean }) {
             </details>
           ))}
           <Link href="/pricing" onClick={() => setMobile(false)} className="block border-b border-line py-3 text-[16px]">Pricing</Link>
-          <Link href="/enterprise" onClick={() => setMobile(false)} className="block border-b border-line py-3 text-[16px]">Enterprise</Link>
+          
           <div className="mt-5 flex gap-3">
             {signedIn ? (
               <Link href="/dashboard" className="btn btn-primary flex-1 py-3">Dashboard</Link>

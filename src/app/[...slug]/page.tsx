@@ -4,7 +4,7 @@ import { SiteShell } from "@/components/site/SiteShell";
 import { PageView } from "@/components/site/PageView";
 import { PAGES } from "@/lib/pages";
 
-const RESERVED = new Set(["products/agent", "enterprise"]);
+const RESERVED = new Set(["products/agent"]);
 const keyOf = (slug: string[]) => slug.join("/");
 
 export function generateStaticParams() {

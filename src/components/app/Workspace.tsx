@@ -103,7 +103,7 @@ export function Workspace(props: { id: string; name: string; initialHtml: string
           <div className="ml-auto flex items-center gap-2">
             <select aria-label="Restore version" className="rounded-lg border border-line bg-white px-2 py-1.5" defaultValue="" onChange={(e) => { if (e.target.value) restore(e.target.value); e.target.value = ""; }}>
               <option value="">History ({versions.length})</option>
-              {versions.map((v) => <option key={v.id} value={v.id}>{new Date(v.created_at).toLocaleString()} — {(v.prompt ?? "").slice(0, 30)}</option>)}
+              {versions.map((v) => <option key={v.id} value={v.id}>{new Date(v.created_at).toLocaleString()} · {(v.prompt ?? "").slice(0, 30)}</option>)}
             </select>
             <button onClick={togglePublic} className="btn btn-ghost">{isPublic ? <Globe size={14} /> : <Lock size={14} />}{isPublic ? "Public" : "Private"}</button>
             {isPublic && <a href={`/p/${props.id}`} target="_blank" rel="noreferrer" className="btn btn-ghost"><ExternalLink size={14} /> Open</a>}

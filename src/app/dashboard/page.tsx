@@ -9,10 +9,9 @@ export const dynamic = "force-dynamic";
 export default async function Dashboard() {
   const { sb, profile } = await requireProfile();
   const { data: projects } = await sb.from("projects").select("id,name,mode,updated_at").order("updated_at", { ascending: false });
-  const first = (profile.full_name ?? "").split(" ")[0];
   return (
     <AppShell>
-      <h1 className="display h-md text-ink2">{first ? `Hi ${first}, what will you build?` : "What will you build?"}</h1>
+      <h1 className="display h-md text-ink2">Describe the outcome. The AI builds it.</h1>
       <div className="mt-8 max-w-3xl"><NewProject /></div>
       <h2 className="mt-14 text-[18px] font-medium tracking-tight">Your projects</h2>
       {!projects?.length ? (

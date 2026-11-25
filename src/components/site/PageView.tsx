@@ -11,7 +11,7 @@ export function PageView({ page }: { page: PageDef }) {
           <p className="eyebrow text-muted">{page.eyebrow}</p>
           <h1 className="display h-xl mt-5 text-ink2" style={{ fontSize: "clamp(2.2rem,5vw,3.75rem)" }}>{page.title}</h1>
           <p className="mx-auto mt-6 max-w-xl text-[16px] leading-7 text-ink2">{page.lede}</p>
-          {page.cta && <Link href={page.cta.href} className="btn btn-primary btn-lg mt-8">{page.cta.label} <ArrowRight size={16} /></Link>}
+          {page.cta && <Link href="/signup" className="btn btn-primary btn-lg mt-8">Sign up <ArrowRight size={16} /></Link>}
         </div>
       </section>
 

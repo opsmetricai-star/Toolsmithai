@@ -9,16 +9,17 @@ import { Logo } from "@/components/site/Logo";
 type Mode = "login" | "signup" | "forgot" | "reset";
 
 const COPY: Record<Mode, { title: string; cta: string }> = {
-  login: { title: "Welcome back", cta: "Log in" },
-  signup: { title: "Create your account", cta: "Sign up" },
-  forgot: { title: "Reset your password", cta: "Send reset link" },
-  reset: { title: "Choose a new password", cta: "Update password" },
+  login: { title: "Log in to ToolSmithAi", cta: "Log in" },
+  signup: { title: "Create your ToolSmithAi account", cta: "Create account" },
+  forgot: { title: "Reset your password", cta: "Reset password" },
+  reset: { title: "Set a new password", cta: "Reset password" },
 };
 
 export function AuthForm({ mode, configured }: { mode: Mode; configured: boolean }) {
   const router = useRouter();
   const params = useSearchParams();
-  const next = params.get("next") && params.get("next")!.startsWith("/") ? params.get("next")! : "/dashboard";
+  const plan = params.get("plan");
+  const next = params.get("next") && params.get("next")!.startsWith("/") && !params.get("next")!.startsWith("//") ? params.get("next")! : plan ? `/billing?plan=${encodeURIComponent(plan)}` : "/dashboard";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -30,10 +31,10 @@ export function AuthForm({ mode, configured }: { mode: Mode; configured: boolean
     e.preventDefault();
     setError(null);
     setInfo(null);
-    if (!configured) return setError("Supabase is not configured. Add the keys from .env.example.");
+    if (!configured) return setError("Authentication is temporarily unavailable. Try again shortly.");
     setBusy(true);
     const sb = supabaseBrowser();
-    const origin = window.location.origin;
+    const origin = window.location.origin; // always the site the user is on, never a hardcoded host
     try {
       if (mode === "login") {
         const { error } = await sb.auth.signInWithPassword({ email, password });
@@ -45,17 +46,17 @@ export function AuthForm({ mode, configured }: { mode: Mode; configured: boolean
         const { data, error } = await sb.auth.signUp({
           email,
           password,
-          options: { data: { full_name: name }, emailRedirectTo: `${origin}/auth/callback?next=/dashboard` },
+          options: { data: { full_name: name }, emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent(next)}` },
         });
         if (error) throw error;
         if (data.session) {
-          router.push("/dashboard");
+          router.push(next);
           router.refresh();
-        } else setInfo("Check your inbox to confirm your email, then log in.");
+        } else setInfo("Account created. Confirm your email using the link we sent, then log in.");
       } else if (mode === "forgot") {
         const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: `${origin}/auth/callback?next=/reset-password` });
         if (error) throw error;
-        setInfo("If an account exists for that email, a reset link is on its way.");
+        setInfo("If an account exists for that email, we have sent a reset link.");
       } else {
         if (password.length < 8) throw new Error("Use at least 8 characters.");
         const { error } = await sb.auth.updateUser({ password });
@@ -99,7 +100,7 @@ export function AuthForm({ mode, configured }: { mode: Mode; configured: boolean
           <div className="mt-6 space-y-2 text-center text-[13px] text-muted">
             {mode === "login" && (<>
               <p><Link href="/forgot-password" className="hover:text-accent">Forgot your password?</Link></p>
-              <p>New here? <Link href="/signup" className="text-accent">Sign up</Link></p>
+              <p>No account yet? <Link href="/signup" className="text-accent">Create account</Link></p>
             </>)}
             {mode === "signup" && <p>Already have an account? <Link href="/login" className="text-accent">Log in</Link></p>}
             {mode === "forgot" && <p><Link href="/login" className="text-accent">Back to log in</Link></p>}

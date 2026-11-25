@@ -1,6 +1,6 @@
-// Site-wide content for ToolSmithAi. Original copy; structure mirrors the audited reference.
+// Site-wide content for ToolSmithAi. Positioning: AI-native platform for business software.
 
-export const BRAND = { name: "ToolSmithAi", short: "ToolSmith" };
+export const BRAND = { name: "ToolSmithAi" };
 
 export const PAYMENT_LINKS = {
   core: "https://selar.com/47plan?currency=USD",
@@ -11,81 +11,62 @@ export const PAYMENT_LINKS = {
 export const PLANS = [
   {
     id: "free",
-    name: "Free",
+    name: "Evaluate",
     price: 0,
     credits: 20,
-    blurb: "Try ToolSmithAi with a small monthly allowance.",
+    blurb: "Test the AI engine on a real workflow before you commit budget.",
     link: null as string | null,
-    features: ["20 generation credits / month", "3 projects", "Live preview", "Community support"],
+    features: ["20 AI builds per month", "3 active projects", "Live preview and version history", "Shareable project links"],
   },
   {
     id: "core",
     name: "Core",
     price: 47,
     credits: 300,
-    blurb: "For personal projects and simple apps.",
+    blurb: "For teams replacing manual processes with AI-built internal tools.",
     link: PAYMENT_LINKS.core as string | null,
-    features: [
-      "300 generation credits / month",
-      "Up to 60 projects",
-      "Unlimited workspaces",
-      "Export and download code",
-      "AI integrations",
-    ],
+    features: ["300 AI builds per month", "Up to 60 projects", "Full source code export", "Version rollback on every project", "Usage ledger with per-build cost"],
   },
   {
     id: "pro",
     name: "Pro",
     price: 57,
     credits: 1000,
-    blurb: "For commercial and professional builds.",
+    blurb: "For operating teams that ship and revise software every week.",
     link: PAYMENT_LINKS.pro as string | null,
-    features: [
-      "Everything in Core, plus:",
-      "1,000 generation credits / month",
-      "Priority model routing",
-      "Premium support",
-      "Up to 15 collaborators",
-      "Version history rollback",
-    ],
+    features: ["Everything in Core, plus:", "1,000 AI builds per month", "Priority model routing", "Premium support", "Built for multi-team delivery"],
   },
   {
     id: "scale",
     name: "Scale",
     price: 97,
     credits: 3000,
-    blurb: "For teams shipping every day.",
+    blurb: "For organizations that run software delivery through AI.",
     link: PAYMENT_LINKS.scale as string | null,
-    features: [
-      "Everything in Pro, plus:",
-      "3,000 generation credits / month",
-      "Advanced privacy controls",
-      "Dedicated support",
-      "Early access to new modes",
-    ],
+    features: ["Everything in Pro, plus:", "3,000 AI builds per month", "Highest build throughput", "Dedicated support", "Priority access to new build types"],
   },
 ];
 
 export const PLAN_CREDITS: Record<string, number> = Object.fromEntries(PLANS.map((p) => [p.id, p.credits]));
 
 export const BUILD_MODES = [
-  { id: "website", label: "Website", icon: "globe", placeholder: "A portfolio site for a ceramic artist with a gallery and contact form…" },
-  { id: "mobile", label: "Mobile", icon: "phone", placeholder: "A habit tracker with streaks, laid out for a phone screen…" },
-  { id: "design", label: "Design", icon: "pen", placeholder: "A moodboard-style landing page for a boutique hotel…" },
-  { id: "slides", label: "Slides", icon: "layers", placeholder: "A 8-slide pitch deck for a meal-kit startup…" },
-  { id: "animation", label: "Animation", icon: "play", placeholder: "An animated logo reveal for a coffee brand…" },
-  { id: "dataviz", label: "Data Visualization", icon: "chart", placeholder: "An interactive chart of monthly sales by region…" },
-  { id: "game", label: "3D Game", icon: "cube", placeholder: "A small three.js game where you steer a ball through a maze…" },
-  { id: "document", label: "Document", icon: "file", placeholder: "A printable invoice template with line items and totals…" },
-  { id: "spreadsheet", label: "Spreadsheet", icon: "table", placeholder: "A budget tracker with live totals and category charts…" },
+  { id: "website", label: "Website", icon: "globe", placeholder: "A partner portal with a product catalog, pricing tiers and an inquiry form…" },
+  { id: "mobile", label: "Mobile", icon: "phone", placeholder: "A field-service checklist for technicians, laid out for a phone screen…" },
+  { id: "design", label: "Design", icon: "pen", placeholder: "A landing page for a logistics platform with a bold, enterprise look…" },
+  { id: "slides", label: "Slides", icon: "layers", placeholder: "An 8-slide board update covering revenue, churn and pipeline risk…" },
+  { id: "animation", label: "Animation", icon: "play", placeholder: "An animated explainer of our onboarding workflow…" },
+  { id: "dataviz", label: "Data Visualization", icon: "chart", placeholder: "An interactive view of monthly revenue by region with variance flags…" },
+  { id: "game", label: "3D Game", icon: "cube", placeholder: "A 3D warehouse-training simulation built with three.js…" },
+  { id: "document", label: "Document", icon: "file", placeholder: "A print-ready purchase order with line items, tax and totals…" },
+  { id: "spreadsheet", label: "Spreadsheet", icon: "table", placeholder: "A budget model with live totals, scenarios and category charts…" },
 ] as const;
 
 export const EXAMPLE_PROMPTS = [
-  "A booking page for a small yoga studio with class schedule and sign-up form",
-  "A kanban board for my team with drag and drop and local persistence",
-  "A mortgage calculator with an amortization chart",
-  "A recipe collection site with search and tag filters",
-  "An animated countdown page for a product launch",
+  "An approvals dashboard that routes purchase requests by amount and flags overspend",
+  "A churn-risk board that ranks accounts by usage decline and renewal date",
+  "A supplier scorecard with delivery performance, defect rate and cost trends",
+  "A sales pipeline view that forecasts quarterly revenue from deal stage and age",
+  "An onboarding tracker that assigns tasks to teams and escalates overdue steps",
 ];
 
 export const NAV = {
@@ -93,19 +74,12 @@ export const NAV = {
     label: "Product",
     groups: [
       {
-        title: "Build",
-        items: [
-          { label: "Agent", desc: "Describe it, and it gets built", href: "/products/agent" },
-          { label: "Design", desc: "An infinite canvas for explorations", href: "/design" },
-          { label: "Slides", desc: "Decks generated from a prompt", href: "/slides" },
-        ],
-      },
-      {
         title: "Platform",
         items: [
-          { label: "Databases", desc: "Postgres with zero setup", href: "/products/database" },
-          { label: "Integrations", desc: "AI, payments, email and more", href: "/integrations" },
-          { label: "Security", desc: "Safe by default as you scale", href: "/security" },
+          { label: "AI Agent", desc: "Turns a business requirement into running software", href: "/products/agent" },
+          { label: "Data layer", desc: "Postgres with row-level security", href: "/products/database" },
+          { label: "Integrations", desc: "Gemini, Supabase and checkout in one stack", href: "/integrations" },
+          { label: "Security", desc: "Isolation and access control by default", href: "/security" },
         ],
       },
     ],
@@ -116,19 +90,17 @@ export const NAV = {
       {
         title: "Use cases",
         items: [
-          { label: "Apps", desc: "Full applications from a sentence", href: "/usecases/ai-app-builder" },
-          { label: "Websites", desc: "Launch a site in minutes", href: "/usecases/ai-website-builder" },
-          { label: "Landing Pages", desc: "Convert more visitors", href: "/usecases/landing-page-builder" },
+          { label: "Internal apps", desc: "Replace spreadsheets and manual handoffs", href: "/usecases/ai-app-builder" },
+          { label: "Business websites", desc: "Partner and customer portals", href: "/usecases/ai-website-builder" },
+          { label: "Landing pages", desc: "Campaign pages built to convert", href: "/usecases/landing-page-builder" },
         ],
       },
       {
         title: "Teams",
         items: [
-          { label: "Founders", desc: "Validate ideas faster", href: "/usecases/founders" },
-          { label: "Product Managers", desc: "Show, don't tell", href: "/usecases/product-managers" },
-          { label: "Designers", desc: "Ship what you design", href: "/usecases/designers" },
-          { label: "Engineers", desc: "Skip the boilerplate", href: "/usecases/software-engineers" },
-          { label: "Operations", desc: "Internal tools in hours", href: "/usecases/operations" },
+          { label: "Operations", desc: "Automate recurring workflows", href: "/usecases/operations" },
+          { label: "Product", desc: "Validate decisions with working software", href: "/usecases/product-managers" },
+          { label: "Engineering", desc: "Remove boilerplate from delivery", href: "/usecases/software-engineers" },
         ],
       },
     ],
@@ -139,20 +111,9 @@ export const NAV = {
       {
         title: "Learn",
         items: [
-          { label: "Docs", desc: "Guides and reference", href: "/docs" },
-          { label: "Blog", desc: "Product news and craft", href: "/blog" },
-          { label: "Community", desc: "Builders helping builders", href: "/community" },
-        ],
-      },
-      {
-        title: "Explore",
-        items: [
-          { label: "Templates", desc: "Start from a working base", href: "/templates" },
-          { label: "Gallery", desc: "Projects made on ToolSmithAi", href: "/gallery" },
-          { label: "Customer Stories", desc: "How teams build with us", href: "/customers" },
-          { label: "Support", desc: "Get help from a human", href: "/support" },
-          { label: "Newsroom", desc: "Press and announcements", href: "/news" },
-          { label: "Partners", desc: "Work with us", href: "/partners" },
+          { label: "Documentation", desc: "Guides for builds, credits and sharing", href: "/docs" },
+          { label: "Support", desc: "Answers on billing and access", href: "/support" },
+          { label: "About", desc: "Why we built ToolSmithAi", href: "/about" },
         ],
       },
     ],
@@ -160,37 +121,26 @@ export const NAV = {
 };
 
 export const FOOTER = [
-  { title: "Product", links: [["Design", "/design"], ["Slides", "/slides"], ["Agents", "/products/agent"], ["Databases", "/products/database"], ["Integrations", "/integrations"], ["Security", "/security"], ["Enterprise", "/enterprise"], ["Pricing", "/pricing"]] },
-  { title: "Resources", links: [["Templates", "/templates"], ["Gallery", "/gallery"], ["Customer stories", "/customers"], ["Docs", "/docs"], ["Blog", "/blog"], ["Community", "/community"], ["Support", "/support"], ["Status", "/status"]] },
-  { title: "Company", links: [["About", "/about"], ["Careers", "/careers"], ["Newsroom", "/news"], ["Partners", "/partners"], ["Certifications", "/certifications"], ["Brand kit", "/brand"], ["Contact us", "/contact"]] },
-  { title: "Legal", links: [["Terms of service", "/legal/terms"], ["Privacy policy", "/legal/privacy"], ["Pro agreement", "/legal/pro-agreement"], ["Enterprise agreement", "/legal/enterprise-agreement"], ["Data processing agreement", "/legal/dpa"], ["Subprocessors", "/legal/subprocessors"], ["Report abuse", "/legal/abuse"]] },
-];
-
-export const TESTIMONIALS = [
-  { quote: "Connecting ToolSmithAi to our warehouse data meant analysts could ship their own internal apps with the right governance already in place.", name: "Marcus Hale", role: "VP Data Platform", co: "Northwind Analytics" },
-  { quote: "Live co-building with partners changed our feedback loop. Instead of mock-ups and meetings, we review working software together.", name: "Priya Raman", role: "Principal Product Manager", co: "Loomstead" },
-  { quote: "A one-line prompt came back with a requirements plan before a single line of code. It took me from rough concept to clickable prototype in an afternoon.", name: "Daniel Okafor", role: "Principal Product Manager", co: "Paylane" },
-  { quote: "Several builders work in one codebase every day. Seeing every task before it merges is exactly the workflow we wanted.", name: "Elena Voss", role: "Co-Founder & Chief AI Officer", co: "Brightmint" },
-  { quote: "Our internal teams prototype and scale tools in hours rather than weeks. Operations finally moves as fast as the product.", name: "Hannah Brooks", role: "SVP, People & Talent", co: "Corvid Systems" },
-  { quote: "Multi-user building through the board is a milestone for enterprises. Individual ideas turn into team projects with clear roles.", name: "Kenji Watanabe", role: "Director", co: "Aoyama Digital Lab" },
+  { title: "Product", links: [["AI Agent", "/products/agent"], ["Data layer", "/products/database"], ["Integrations", "/integrations"], ["Security", "/security"], ["Pricing", "/pricing"]] },
+  { title: "Solutions", links: [["Internal apps", "/usecases/ai-app-builder"], ["Business websites", "/usecases/ai-website-builder"], ["Operations", "/usecases/operations"]] },
+  { title: "Company", links: [["About", "/about"], ["Documentation", "/docs"], ["Support", "/support"]] },
+  { title: "Legal", links: [["Terms of service", "/legal/terms"], ["Privacy policy", "/legal/privacy"], ["Data processing agreement", "/legal/dpa"], ["Subprocessors", "/legal/subprocessors"]] },
 ];
 
 export const AGENT_FAQ = [
-  ["What is the ToolSmithAi Agent?", "It is an AI builder that turns a plain-language description into a working app, site or document. You refine the result through conversation and publish from the same workspace."],
-  ["How does it work?", "You describe what you want. The Agent plans the build, writes the code with a Gemini model, shows a live preview and keeps every version so you can roll back."],
-  ["What can I build?", "Websites, landing pages, small web apps, dashboards, slide decks, animations, calculators, documents and spreadsheets-style tools."],
-  ["Do I need to write code?", "No. You can read and edit the generated code if you like, but every change can be made by asking."],
-  ["Does it deploy my app?", "You can download the project or share a public preview link. Production hosting integrations are on the roadmap and are not enabled yet."],
-  ["Can it build mobile apps?", "It builds mobile-first web apps that run in the browser. Native store builds are not supported."],
+  ["What does the ToolSmithAi Agent do?", "It converts a business requirement written in plain language into a working application. It plans the structure, generates the code with Gemini models, validates the output and returns a live preview."],
+  ["How are revisions handled?", "Each change request is applied to the existing project and stored as a version. Any earlier version can be restored in one action."],
+  ["What can the platform build?", "Internal tools, portals, dashboards, landing pages, slide decks, data visualizations, documents and spreadsheet-style models."],
+  ["Does my team need engineers?", "No. Operators describe the outcome and the Agent builds it. Engineers can inspect and export the full source code at any time."],
+  ["How do we share a project?", "Switch a project to public to publish a link, or download the complete file. Projects are private by default."],
+  ["How is usage measured?", "Every build and revision consumes one credit, recorded in a usage ledger with its time and model."],
 ];
 
 export const PRICING_FAQ = [
-  ["What are all the features included in these plans?", "Every paid plan includes live previews, project history, code export and priority generation. Higher tiers add more monthly credits, collaborators and support."],
-  ["How do credits work?", "Each generation or revision spends one credit. Your plan's allowance resets monthly and the dashboard shows your remaining balance in real time."],
-  ["What happens when I run out of credits?", "Generation pauses until your allowance resets or you upgrade. Your projects stay available and editable."],
-  ["What comes with my subscription?", "Your plan's monthly credits, project and collaborator limits, support level and access to every build mode."],
-  ["What plan is best for me?", "Core suits personal projects, Pro suits commercial work and small teams, Scale suits teams generating daily."],
-  ["How can I see how much I'm spending?", "The Usage page in your dashboard lists every generation with the credits it consumed."],
-  ["Do you offer invoicing instead of credit card payments?", "Checkout is handled by our payment partner. For invoiced billing, contact sales."],
-  ["Do you offer annual plans at a discount?", "Annual billing is not available yet. Today every plan is billed monthly."],
+  ["What is included in every plan?", "Live preview, version history, source export and shareable links. Higher tiers raise monthly build volume and support level."],
+  ["How do credits work?", "Each build or revision uses one credit. The allowance resets monthly and the dashboard shows the live balance."],
+  ["What happens when credits run out?", "New builds pause until the allowance resets or the plan is upgraded. Existing projects stay available."],
+  ["Which plan fits our team?", "Core suits a team automating its first workflows. Pro suits teams shipping weekly. Scale suits organizations running delivery through AI."],
+  ["How can we audit spend?", "The Usage page lists every build with its credit cost, model and timestamp."],
+  ["How is billing handled?", "Plans are billed monthly in USD through our payment partner. After payment, enter the order reference on the Billing page and the plan is activated once verified."],
 ];

@@ -48,7 +48,7 @@ export async function generateProject(args: {
   history?: { role: "user" | "assistant"; content: string }[];
 }): Promise<GenResult> {
   const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error("GEMINI_API_KEY is not configured on the server.");
+  if (!key) throw new Error("AI generation is temporarily unavailable. Please try again shortly.");
 
   const contents = [
     ...(args.history ?? []).slice(-6).map((m) => ({ role: m.role === "user" ? "user" : "model", parts: [{ text: m.content }] })),
